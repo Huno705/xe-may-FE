@@ -1,0 +1,129 @@
+.nav-pill {
+  position: fixed;
+  inset: var(--space-md) 0 auto 0;
+  margin-inline: auto;
+  width: fit-content;
+  max-width: calc(100% - var(--space-lg) * 2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: 0.6rem 0.75rem 0.6rem 1.1rem;
+  background: color-mix(in oklch, var(--color-paper) 78%, transparent);
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 8px 24px -14px oklch(40% 0.02 60 / 0.28);
+  z-index: 40;
+}
+
+.nav-pill__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: var(--text-sm);
+  letter-spacing: 0.06em;
+  color: var(--color-ink);
+  white-space: nowrap;
+}
+
+.nav-pill__mark {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 8px 1px oklch(70% 0.19 45 / 0.6);
+}
+
+.nav-pill__links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-pill__link {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  padding: 0.35rem 0.2rem;
+  transition: color var(--dur-short) var(--ease-out);
+  white-space: nowrap;
+}
+
+.nav-pill__link:hover {
+  color: var(--color-ink);
+}
+
+.nav-pill__link.active {
+  color: var(--color-ink);
+}
+
+.nav-pill__admin {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.nav-pill__logout {
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+  background: none;
+  border: none;
+  padding: 0.35rem 0.2rem;
+  transition: color var(--dur-short) var(--ease-out);
+}
+
+.nav-pill__logout:hover {
+  color: var(--color-danger);
+}
+
+.nav-pill__cta {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-paper);
+  background: var(--color-accent);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-pill);
+  white-space: nowrap;
+  transition: background var(--dur-short) var(--ease-out), transform var(--dur-short) var(--ease-out);
+}
+
+.nav-pill__cta:hover {
+  background: var(--color-accent-2);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 30rem) {
+  .nav-pill {
+    gap: var(--space-xs);
+    padding: 0.45rem 0.5rem 0.45rem 0.8rem;
+    max-width: calc(100% - var(--space-md) * 2);
+  }
+  .nav-pill__brand,
+  .nav-pill__link,
+  .nav-pill__logout,
+  .nav-pill__cta {
+    font-size: var(--text-xs);
+  }
+  .nav-pill__links,
+  .nav-pill__admin {
+    gap: var(--space-sm);
+  }
+  .nav-pill__cta {
+    padding: 0.4rem 0.75rem;
+  }
+}
+
+/* Coarse pointers (touch) — comfortable tap targets */
+@media (pointer: coarse) {
+  .nav-pill__link,
+  .nav-pill__logout {
+    padding-block: 0.5rem;
+  }
+}

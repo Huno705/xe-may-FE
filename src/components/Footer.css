@@ -1,0 +1,12 @@
+.foot-line {
+  border-top: var(--rule-hair) solid var(--color-rule);
+  padding-block: var(--space-lg);
+  margin-top: var(--space-3xl);
+}
+
+.foot-line p {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-neutral);
+  letter-spacing: 0.02em;
+}
