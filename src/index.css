@@ -22,8 +22,8 @@ body {
   color: var(--color-ink);
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: var(--text-base);
-  line-height: 1.6;
+  font-size: 1.0625rem;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   min-height: 100dvh;
@@ -66,8 +66,8 @@ h4 {
   font-family: var(--font-display);
   font-weight: 600;
   font-style: normal;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
   margin: 0;
   color: var(--color-ink);
   overflow-wrap: anywhere;
