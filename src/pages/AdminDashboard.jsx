@@ -241,8 +241,8 @@ export default function AdminDashboard() {
               <th scope="col">Hình</th>
               <th scope="col">Tên xe</th>
               <th scope="col">Giá</th>
-              <th scope="col" className="sr-only">
-                Hành động
+              <th scope="col">
+                Thao tác
               </th>
             </tr>
           </thead>

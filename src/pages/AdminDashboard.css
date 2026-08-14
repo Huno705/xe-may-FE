@@ -84,7 +84,11 @@
 
 .admin__table {
   width: 100%;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 2px solid var(--color-rule-2);
+  border-radius: var(--radius-md);
+  overflow: hidden;
 }
 
 .admin__table th {
@@ -93,14 +97,29 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--color-neutral);
-  padding-bottom: var(--space-sm);
-  border-bottom: var(--rule-hair) solid var(--color-rule);
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 2px solid var(--color-rule-2);
+  background: var(--color-paper-2);
 }
 
 .admin__table td {
-  padding-block: var(--space-sm);
-  border-bottom: var(--rule-hair) solid var(--color-rule);
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--color-rule);
   vertical-align: middle;
+  border-right: 1px solid var(--color-rule);
+  background: var(--color-paper);
+}
+
+.admin__table tbody tr:nth-child(even) td {
+  background: var(--color-paper-2);
+}
+
+.admin__table tr:last-child td {
+  border-bottom: none;
+}
+
+.admin__table td:last-child {
+  border-right: none;
 }
 
 .admin__thumb {
