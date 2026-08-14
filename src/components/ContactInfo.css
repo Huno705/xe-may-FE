@@ -25,6 +25,12 @@
   transition: color var(--dur-short) var(--ease-out);
 }
 
-.contactInfo__hotlineNumber:hover {
-  color: var(--color-accent-2);
+@media (max-width: 40rem) {
+  .contactInfo {
+    padding: var(--space-sm) var(--space-md);
+  }
+  .contactInfo__hotline {
+    font-size: var(--text-base);
+    flex-wrap: wrap;
+  }
 }

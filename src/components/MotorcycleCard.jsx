@@ -4,7 +4,7 @@ import "./MotorcycleCard.css";
 
 export default function MotorcycleCard({ motorcycle }) {
   const image = motorcycle.images?.[0];
-  const hasDeposits = (motorcycle.saigon_deposit > 0 || motorcycle.province_deposit > 0);
+  const hasDeposits = motorcycle.saigon_deposit !== undefined || motorcycle.province_deposit !== undefined;
   const branchName = motorcycle.branches?.name;
 
   return (
@@ -24,7 +24,7 @@ export default function MotorcycleCard({ motorcycle }) {
         <p className="moto-card__price tabular-nums">{formatPrice(motorcycle.price)}</p>
         {hasDeposits && (
           <div className="moto-card__deposits">
-            {motorcycle.saigon_deposit > 0 && (
+            {motorcycle.saigon_deposit !== undefined && (
               <span className="moto-card__deposit">
                 Sài Gòn đưa trước:{" "}
                 <span className="moto-card__deposit-value">
@@ -32,7 +32,7 @@ export default function MotorcycleCard({ motorcycle }) {
                 </span>
               </span>
             )}
-            {motorcycle.province_deposit > 0 && (
+            {motorcycle.province_deposit !== undefined && (
               <span className="moto-card__deposit">
                 Tỉnh đưa trước:{" "}
                 <span className="moto-card__deposit-value">

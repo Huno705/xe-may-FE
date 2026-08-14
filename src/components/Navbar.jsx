@@ -1,9 +1,15 @@
+import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "./Navbar.css";
 
 export default function Navbar() {
   const { admin, logout } = useAuth();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, []);
 
   return (
     <nav className="navbar" aria-label="Điều hướng chính">
@@ -71,7 +77,7 @@ export default function Navbar() {
         <div className="navbar__actions">
           {admin ? (
             <>
-              <NavLink to="/admin" className="navbar__action navbar__action--ghost">
+              <NavLink to="/admin" className="navbar__action navbar__action--ghost" aria-label="Trang quản trị">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M3 3h7v7H3zM14 3h7v4h-7zM14 11h7v10h-7zM3 14h7v7H3z" />
                 </svg>
@@ -86,6 +92,37 @@ export default function Navbar() {
             </Link>
           )}
         </div>
+
+        <button
+          type="button"
+          className={`navbar__burger ${menuOpen ? "is-open" : ""}`}
+          aria-label="Mở menu"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((v) => !v)}
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <div className={`navbar__drawer ${menuOpen ? "is-open" : ""}`}>
+        <ul className="navbar__drawerList" onClick={() => setMenuOpen(false)}>
+          <li><NavLink to="/" end>TRANG CHỦ</NavLink></li>
+          <li><NavLink to="/bo-suu-tap">BỘ SƯU TẬP</NavLink></li>
+          <li><a href="#about">GIỚI THIỆU</a></li>
+          <li><a href="#contact">LIÊN HỆ</a></li>
+          <li><a href="#compare">SO SÁNH</a></li>
+          <li><a href="#news">TIN TỨC</a></li>
+          {admin ? (
+            <>
+              <li><NavLink to="/admin">TRANG QUẢN TRỊ</NavLink></li>
+              <li><button type="button" onClick={logout}>ĐĂNG XUẤT</button></li>
+            </>
+          ) : (
+            <li><Link to="/login">ĐĂNG NHẬP</Link></li>
+          )}
+        </ul>
       </div>
     </nav>
   );

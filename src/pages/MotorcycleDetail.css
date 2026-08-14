@@ -191,6 +191,21 @@
   .detail__layout {
     grid-template-columns: 1fr;
   }
+  .detail__container {
+    padding: var(--space-xl);
+  }
+}
+
+@media (max-width: 40rem) {
+  .detail__name {
+    font-size: var(--text-xl);
+  }
+  .detail__price {
+    font-size: var(--text-md);
+  }
+  .detail__container {
+    padding: var(--space-lg);
+  }
 }
 
 @media (max-width: 30rem) {

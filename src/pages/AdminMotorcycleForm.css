@@ -208,12 +208,21 @@
   color: var(--color-text);
 }
 
+@media (max-width: 40rem) {
+  .admin-form__card {
+    padding: var(--space-lg);
+  }
+  .admin-form__imageGrid {
+    grid-template-columns: repeat(auto-fill, minmax(4rem, 1fr));
+  }
+}
+
 @media (max-width: 30rem) {
   .admin-form {
     padding-top: 6.5rem;
   }
   .admin-form__card {
-    padding: var(--space-lg);
+    padding: var(--space-md);
   }
   .admin-form__submit {
     width: 100%;

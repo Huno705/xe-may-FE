@@ -45,6 +45,10 @@
 @media (max-width: 60rem) {
   .moto-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-xl);
+  }
+  .home__title {
+    font-size: clamp(2rem, 5vw + 0.5rem, 3.2rem);
   }
 }
 
@@ -85,9 +89,26 @@
   color: #fff;
 }
 
+@media (max-width: 40rem) {
+  .home__headerSection {
+    padding: var(--space-md);
+  }
+  .home__eyebrow {
+    font-size: var(--text-base);
+  }
+  .home__branchTabsContainer {
+    padding: var(--space-sm);
+  }
+  .home__branchTab {
+    font-size: var(--text-xs);
+    padding: 0.45rem 0.8rem;
+  }
+}
+
 @media (max-width: 30rem) {
   .moto-grid {
     grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-lg);
   }
   .home {
     padding-top: 6.5rem;

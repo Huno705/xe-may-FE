@@ -104,3 +104,19 @@
   flex-direction: column;
   gap: 0.35rem;
 }
+
+@media (max-width: 40rem) {
+  .moto-card__name {
+    font-size: var(--text-base);
+  }
+  .moto-card__price {
+    font-size: var(--text-base);
+  }
+  .moto-card__deposit {
+    font-size: var(--text-xs);
+    padding: 0.3rem 0.55rem;
+  }
+  .moto-card__meta {
+    padding: var(--space-sm);
+  }
+}
