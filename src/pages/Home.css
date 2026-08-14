@@ -4,11 +4,19 @@
 }
 
 .home__header {
+  margin-bottom: var(--space-lg);
+}
+
+.home__headerSection {
+  background: var(--color-paper-2);
+  border: 2px solid var(--color-rule-2);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl) var(--space-lg);
   margin-bottom: var(--space-2xl);
 }
 
 .home__eyebrow {
-  font-size: var(--text-md);
+  font-size: var(--text-lg);
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--color-accent-2);
@@ -40,11 +48,17 @@
   }
 }
 
+.home__branchTabsContainer {
+  background: var(--color-paper-2);
+  border: 2px solid var(--color-rule-2);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+}
+
 .home__branchTabs {
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-sm);
-  margin-bottom: var(--space-2xl);
 }
 
 .home__branchTab {
@@ -68,7 +82,7 @@
 .home__branchTab.is-active {
   background: var(--color-ink);
   border-color: var(--color-ink);
-  color: var(--color-paper);
+  color: #fff;
 }
 
 @media (max-width: 30rem) {

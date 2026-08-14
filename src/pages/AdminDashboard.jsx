@@ -86,6 +86,7 @@ export default function AdminDashboard() {
 
   return (
     <div className="container admin">
+      <div className="admin__container">
       <header className="admin__header">
         <div>
           <p className="admin__eyebrow mono">Quản lý showroom</p>
@@ -300,6 +301,7 @@ export default function AdminDashboard() {
           </tbody>
         </table>
       )}
+      </div>
     </div>
   );
 }

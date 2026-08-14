@@ -3,6 +3,13 @@
   padding-bottom: var(--space-3xl);
 }
 
+.detail__container {
+  background: var(--color-paper-2);
+  border: 2px solid var(--color-rule-2);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+}
+
 .detail__state {
   padding-top: 8rem;
   color: var(--color-muted);

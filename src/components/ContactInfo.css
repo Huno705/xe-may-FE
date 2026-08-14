@@ -1,0 +1,30 @@
+.contactInfo {
+  background: var(--color-paper-2);
+  border: 2px solid var(--color-rule-2);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md) var(--space-lg);
+}
+
+.contactInfo__hotline {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+}
+
+.contactInfo__hotlineLabel {
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.contactInfo__hotlineNumber {
+  font-weight: 700;
+  color: var(--color-accent);
+  letter-spacing: 0.02em;
+  transition: color var(--dur-short) var(--ease-out);
+}
+
+.contactInfo__hotlineNumber:hover {
+  color: var(--color-accent-2);
+}

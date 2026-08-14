@@ -6,7 +6,7 @@ import MotorcycleCard from "../components/MotorcycleCard";
 import ContactInfo from "../components/ContactInfo";
 import "./Home.css";
 
-export default function Home() {
+export default function Collection() {
   const [motorcycles, setMotorcycles] = useState([]);
   const [branches, setBranches] = useState([]);
   const [status, setStatus] = useState("loading");

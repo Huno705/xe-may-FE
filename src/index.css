@@ -30,7 +30,7 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-/* Background layer — hairline blueprint grid + two faint blooms + edge vignette.
+/* Background layer — two faint blooms + edge vignette.
    Reads as a spec-sheet / engineering-drawing backdrop, not a flat wash — kept
    faint throughout so body copy and cards stay crisp on top. */
 body::before {
@@ -39,12 +39,6 @@ body::before {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-image:
-    linear-gradient(var(--bg-grid-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--bg-grid-line) 1px, transparent 1px);
-  background-size: var(--bg-grid-size) var(--bg-grid-size);
-  mask-image: radial-gradient(120% 100% at 50% 0%, black 55%, transparent 100%);
-  -webkit-mask-image: radial-gradient(120% 100% at 50% 0%, black 55%, transparent 100%);
 }
 
 body::after {
@@ -64,7 +58,7 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   font-style: normal;
   line-height: 1.2;
   letter-spacing: -0.015em;
@@ -76,6 +70,7 @@ h4 {
 
 p {
   margin: 0;
+  font-weight: 500;
 }
 
 a {

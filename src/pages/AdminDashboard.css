@@ -3,6 +3,13 @@
   padding-bottom: var(--space-3xl);
 }
 
+.admin__container {
+  background: var(--color-paper-2);
+  border: 2px solid var(--color-rule-2);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+}
+
 .admin__header {
   display: flex;
   justify-content: space-between;
@@ -107,11 +114,11 @@
   border-bottom: 1px solid var(--color-rule);
   vertical-align: middle;
   border-right: 1px solid var(--color-rule);
-  background: oklch(94% 0.04 50);
+  background: var(--color-paper);
 }
 
 .admin__table tbody tr:nth-child(even) td {
-  background: oklch(90% 0.06 50);
+  background: var(--color-paper-2);
 }
 
 .admin__table tr:last-child td {

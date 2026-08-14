@@ -5,16 +5,16 @@
  */
 :root {
   /* Paper / ink / neutrals — warm-paper anchor, hue ~65, lightly tinted */
-  --color-paper:    oklch(98.5% 0.010 78);
-  --color-paper-2:  oklch(96%   0.014 72);
-  --color-paper-3:  oklch(93%   0.017 66);
+  --color-paper:    oklch(100% 0.00011 271.152);
+  --color-paper-2:  oklch(100% 0 0);
+  --color-paper-3:  oklch(94% 0.04 50);
   --color-rule:     oklch(88%   0.014 68);
   --color-rule-2:   oklch(80%   0.016 62);
   --color-neutral:  oklch(52%   0.012 55);
   --color-muted:    oklch(42%   0.014 50);
-  --color-ink:      oklch(22%   0.016 50);
-  --color-ink-2:    oklch(36%   0.014 52);
-  --color-text:     oklch(22%   0.016 50);
+  --color-ink:      oklch(7.535% 0.01675 66.147);
+  --color-ink-2:    oklch(0% 0 0);
+  --color-text:     oklch(0% 0 0);
 
   /* Accent — signal orange, deepened for contrast on light paper */
   --color-accent:   oklch(56% 0.17 45);
@@ -36,16 +36,16 @@
   --font-mono:    ui-monospace, monospace;
 
   /* Type scale — major third (1.25) */
-  --text-xs:   0.8rem;
-  --text-sm:   0.9rem;
-  --text-base: 1rem;
-  --text-md:   1.25rem;
-  --text-lg:   1.5625rem;
-  --text-xl:   1.9531rem;
-  --text-2xl:  2.4414rem;
-  --text-3xl:  3.0518rem;
-  --text-display:   clamp(2.75rem, 5vw + 1rem, 5rem);
-  --text-display-s: clamp(2.25rem, 4vw + 1rem, 3.75rem);
+  --text-xs:   0.9rem;
+  --text-sm:   1rem;
+  --text-base: 1.15rem;
+  --text-md:   1.4rem;
+  --text-lg:   1.75rem;
+  --text-xl:   2.15rem;
+  --text-2xl:  2.7rem;
+  --text-3xl:  3.35rem;
+  --text-display:   clamp(3rem, 5.5vw + 1rem, 5.5rem);
+  --text-display-s: clamp(2.5rem, 4.5vw + 1rem, 4.1rem);
 
   /* Spacing — 4pt scale */
   --space-2xs: 0.25rem;

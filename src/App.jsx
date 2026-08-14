@@ -3,6 +3,7 @@ import { AuthProvider } from "./context/AuthContext";
 import Layout from "./components/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
+import Collection from "./pages/Collection";
 import MotorcycleDetail from "./pages/MotorcycleDetail";
 import Login from "./pages/Login";
 import AdminDashboard from "./pages/AdminDashboard";
@@ -15,6 +16,7 @@ function App() {
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
+            <Route path="/bo-suu-tap" element={<Collection />} />
             <Route path="/xe/:id" element={<MotorcycleDetail />} />
             <Route path="/login" element={<Login />} />
             <Route
