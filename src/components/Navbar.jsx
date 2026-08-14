@@ -9,7 +9,7 @@ export default function Navbar() {
     <nav className="nav-pill" aria-label="Điều hướng chính">
       <Link to="/" className="nav-pill__brand">
         <span className="nav-pill__mark" aria-hidden="true" />
-        MOTO
+        3sgo
       </Link>
 
       <ul className="nav-pill__links">

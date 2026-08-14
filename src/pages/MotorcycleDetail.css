@@ -125,6 +125,55 @@
   margin-bottom: var(--space-lg);
 }
 
+.detail__branch {
+  font-size: var(--text-sm);
+  color: var(--color-neutral);
+  margin-bottom: var(--space-md);
+}
+
+.detail__branchLabel {
+  color: var(--color-muted);
+}
+
+.detail__deposits {
+  margin-bottom: var(--space-lg);
+  padding: var(--space-md);
+  background: var(--color-paper-2);
+  border: var(--rule-hair) solid var(--color-rule);
+  border-radius: var(--radius-md);
+}
+
+.detail__sectionTitle {
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.detail__deposit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-xs) 0;
+}
+
+.detail__deposit:not(:last-child) {
+  border-bottom: var(--rule-hair) solid var(--color-rule);
+}
+
+.detail__depositLabel {
+  font-size: var(--text-sm);
+  color: var(--color-text);
+}
+
+.detail__depositValue {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--color-accent-2);
+  font-weight: 500;
+}
+
 .detail__description {
   color: var(--color-ink-2);
   max-width: 65ch;

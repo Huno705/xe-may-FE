@@ -14,6 +14,7 @@
   --color-muted:    oklch(42%   0.014 50);
   --color-ink:      oklch(22%   0.016 50);
   --color-ink-2:    oklch(36%   0.014 52);
+  --color-text:     oklch(22%   0.016 50);
 
   /* Accent — signal orange, deepened for contrast on light paper */
   --color-accent:   oklch(56% 0.17 45);

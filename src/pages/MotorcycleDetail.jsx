@@ -78,6 +78,32 @@ export default function MotorcycleDetail() {
         <div className="detail__info">
           <h1 className="detail__name">{moto.name}</h1>
           <p className="detail__price tabular-nums">{formatPrice(moto.price)}</p>
+          {moto.branches?.name && (
+            <p className="detail__branch">
+              <span className="detail__branchLabel">Chi nhánh:</span> {moto.branches.name}
+            </p>
+          )}
+          {(moto.saigon_deposit > 0 || moto.province_deposit > 0) && (
+            <div className="detail__deposits">
+              <h2 className="detail__sectionTitle">Đặt cọc</h2>
+              {moto.saigon_deposit > 0 && (
+                <p className="detail__deposit">
+                  <span className="detail__depositLabel">Sài Gòn đưa trước:</span>{" "}
+                  <span className="detail__depositValue tabular-nums">
+                    {formatPrice(moto.saigon_deposit)}
+                  </span>
+                </p>
+              )}
+              {moto.province_deposit > 0 && (
+                <p className="detail__deposit">
+                  <span className="detail__depositLabel">Tỉnh đưa trước:</span>{" "}
+                  <span className="detail__depositValue tabular-nums">
+                    {formatPrice(moto.province_deposit)}
+                  </span>
+                </p>
+              )}
+            </div>
+          )}
           {moto.description && (
             <p className="detail__description">{moto.description}</p>
           )}
