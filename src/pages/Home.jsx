@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getMotorcycles } from "../api/motorcycles";
 import { getBranches } from "../api/branches";
 import { useBranchFilter } from "../context/BranchContext";
+import { useSearch } from "../context/SearchContext";
 import MotorcycleCard from "../components/MotorcycleCard";
 import ContactInfo from "../components/ContactInfo";
 import "./Home.css";
@@ -11,6 +12,7 @@ export default function Home() {
   const [branches, setBranches] = useState([]);
   const [status, setStatus] = useState("loading");
   const { selectedBranch, setSelectedBranch } = useBranchFilter();
+  const { query, setQuery } = useSearch();
 
   useEffect(() => {
     Promise.all([getMotorcycles(), getBranches()])
@@ -22,9 +24,24 @@ export default function Home() {
       .catch(() => setStatus("error"));
   }, []);
 
-  const filteredMotorcycles = selectedBranch !== null
-    ? motorcycles.filter((m) => m.branch_id === selectedBranch)
-    : motorcycles;
+  const normalizedQuery = query.trim().toLowerCase();
+
+  const filteredMotorcycles = motorcycles.filter((m) => {
+    if (selectedBranch !== null && m.branch_id !== selectedBranch) {
+      return false;
+    }
+    if (normalizedQuery) {
+      const haystack = `${m.name || ""} ${m.description || ""}`.toLowerCase();
+      if (!haystack.includes(normalizedQuery)) return false;
+    }
+    return true;
+  });
+
+  const hasFilter = selectedBranch !== null || normalizedQuery.length > 0;
+
+  const handleClearSearch = () => {
+    setQuery("");
+  };
 
   return (
     <div className="container home">
@@ -59,6 +76,17 @@ export default function Home() {
             </div>
           </div>
         )}
+
+        {normalizedQuery && (
+          <div className="home__searchBadge" role="status">
+            <span>
+              Kết quả cho: <strong>"{query}"</strong>
+            </span>
+            <button type="button" onClick={handleClearSearch} aria-label="Xoá từ khoá">
+              ×
+            </button>
+          </div>
+        )}
       </div>
 
       {status === "loading" && (
@@ -73,8 +101,8 @@ export default function Home() {
 
       {status === "ready" && filteredMotorcycles.length === 0 && (
         <p className="home__state">
-          {selectedBranch !== null
-            ? "Chi nhánh này hiện chưa có xe nào."
+          {hasFilter
+            ? "Không tìm thấy xe phù hợp với bộ lọc hiện tại."
             : "Hiện chưa có xe nào được trưng bày."}
         </p>
       )}

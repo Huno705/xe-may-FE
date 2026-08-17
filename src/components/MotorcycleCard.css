@@ -53,7 +53,6 @@
 }
 
 .moto-card__price {
-  font-family: var(--font-mono);
   font-size: var(--text-md);
   color: var(--color-danger);
   font-weight: 600;

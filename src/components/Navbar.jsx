@@ -1,15 +1,30 @@
 import { useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { useSearch } from "../context/SearchContext";
 import "./Navbar.css";
 
 export default function Navbar() {
   const { admin, logout } = useAuth();
+  const { query, setQuery } = useSearch();
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setMenuOpen(false);
   }, []);
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    const trimmed = query.trim();
+    setQuery(trimmed);
+    setMenuOpen(false);
+    if (trimmed) {
+      navigate(`/bo-suu-tap?q=${encodeURIComponent(trimmed)}`);
+    } else {
+      navigate("/bo-suu-tap");
+    }
+  };
 
   return (
     <nav className="navbar" aria-label="Điều hướng chính">
@@ -59,12 +74,14 @@ export default function Navbar() {
           </li>
         </ul>
 
-        <form className="navbar__search" onSubmit={(e) => e.preventDefault()}>
+        <form className="navbar__search" onSubmit={handleSearchSubmit}>
           <input
             type="search"
             className="navbar__searchInput"
             placeholder="Tìm kiếm xe..."
             aria-label="Tìm kiếm xe"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
           />
           <button type="submit" className="navbar__searchBtn" aria-label="Tìm kiếm">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
@@ -107,6 +124,21 @@ export default function Navbar() {
       </div>
 
       <div className={`navbar__drawer ${menuOpen ? "is-open" : ""}`}>
+        <form className="navbar__drawerSearch" onSubmit={handleSearchSubmit}>
+          <input
+            type="search"
+            placeholder="Tìm kiếm xe..."
+            aria-label="Tìm kiếm xe"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+          />
+          <button type="submit" aria-label="Tìm kiếm">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4">
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-3.5-3.5" strokeLinecap="round" />
+            </svg>
+          </button>
+        </form>
         <ul className="navbar__drawerList" onClick={() => setMenuOpen(false)}>
           <li><NavLink to="/" end>TRANG CHỦ</NavLink></li>
           <li><NavLink to="/bo-suu-tap">BỘ SƯU TẬP</NavLink></li>

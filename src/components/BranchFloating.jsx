@@ -47,7 +47,7 @@ const FALLBACK_DETAILS = {
     phone: "032.5678.300",
     phoneRaw: "0325678300",
     zalo: "https://zalo.me/0325678300",
-    facebookName: "Xe Điện Lướt Quận 12 - Hỗ Trợ Nậu Xớ",
+    facebookName: "Xe Điện Lướt Quận 8 - Hỗ Trợ Nậu Xớ",
     facebookUrl: "https://www.facebook.com/share/185KY6Hux9/?mibextid=wwXIfr",
     subtitle: "Xe Điện Lướt - Quận 8",
   },
@@ -76,7 +76,7 @@ export default function BranchFloating() {
         return (
           <article key={branch.id} className="branchFloat__card">
             <h3 className="branchFloat__title">
-              {branch.name}: <span>{subtitle}</span>
+              <span>{subtitle}</span>
             </h3>
 
             <ul className="branchFloat__list">
