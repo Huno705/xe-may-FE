@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { getMotorcycles, deleteMotorcycle } from "../api/motorcycles";
 import { getBranches, createBranch, deleteBranch } from "../api/branches";
@@ -15,6 +15,7 @@ export default function AdminDashboard() {
   const [addingBranch, setAddingBranch] = useState(false);
   const [branchError, setBranchError] = useState("");
   const [showBranchModal, setShowBranchModal] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const load = () => {
     setStatus("loading");
@@ -75,6 +76,24 @@ export default function AdminDashboard() {
     setShowBranchModal(true);
     document.body.style.overflow = "hidden";
   };
+
+  const normalizedQuery = searchQuery.trim().toLowerCase();
+
+  const filteredMotorcycles = useMemo(() => {
+    if (!normalizedQuery) return motorcycles;
+    return motorcycles.filter((m) => {
+      const name = (m.name || "").toLowerCase();
+      const description = (m.description || "").toLowerCase();
+      const branchName = (m.branches?.name || "").toLowerCase();
+      return (
+        name.includes(normalizedQuery) ||
+        description.includes(normalizedQuery) ||
+        branchName.includes(normalizedQuery)
+      );
+    });
+  }, [motorcycles, normalizedQuery]);
+
+  const clearSearch = () => setSearchQuery("");
 
   const closeBranchModal = () => {
     setShowBranchModal(false);
@@ -231,11 +250,49 @@ export default function AdminDashboard() {
         <p className="admin__state admin__state--error">Không thể tải danh sách xe.</p>
       )}
 
+      {status === "ready" && motorcycles.length > 0 && (
+        <div className="admin__searchBar">
+          <svg className="admin__searchIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="11" cy="11" r="7" />
+            <path d="m21 21-4.3-4.3" />
+          </svg>
+          <input
+            type="search"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Tìm theo tên, mô tả hoặc chi nhánh..."
+            className="admin__searchInput"
+            aria-label="Tìm kiếm xe"
+          />
+          {searchQuery && (
+            <button
+              type="button"
+              className="admin__searchClear"
+              onClick={clearSearch}
+              aria-label="Xoá từ khoá"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
+          )}
+          {normalizedQuery && (
+            <span className="admin__searchCount">
+              {filteredMotorcycles.length} / {motorcycles.length} kết quả
+            </span>
+          )}
+        </div>
+      )}
+
       {status === "ready" && motorcycles.length === 0 && (
         <p className="admin__state">Chưa có xe nào. Bấm "Thêm xe mới" để bắt đầu.</p>
       )}
 
-      {status === "ready" && motorcycles.length > 0 && (
+      {status === "ready" && motorcycles.length > 0 && filteredMotorcycles.length === 0 && (
+        <p className="admin__state">Không tìm thấy xe phù hợp với "{searchQuery}".</p>
+      )}
+
+      {status === "ready" && filteredMotorcycles.length > 0 && (
         <table className="admin__table">
           <thead>
             <tr>
@@ -248,7 +305,7 @@ export default function AdminDashboard() {
             </tr>
           </thead>
           <tbody>
-            {motorcycles.map((moto) => (
+            {filteredMotorcycles.map((moto) => (
               <tr key={moto.id}>
                 <td>
                   <div className="admin__thumb">
