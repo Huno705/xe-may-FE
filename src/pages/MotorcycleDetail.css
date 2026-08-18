@@ -126,9 +126,9 @@
 }
 
 .detail__price {
-  font-family: var(--font-mono);
-  font-size: var(--text-lg);
-  color: var(--color-accent-2);
+  font-size: var(--text-xl);
+  color: var(--color-danger);
+  font-weight: 700;
   margin-bottom: var(--space-lg);
 }
 
@@ -175,10 +175,9 @@
 }
 
 .detail__depositValue {
-  font-family: var(--font-mono);
-  font-size: var(--text-sm);
-  color: var(--color-accent-2);
-  font-weight: 500;
+  font-size: var(--text-base);
+  color: var(--color-danger);
+  font-weight: 700;
 }
 
 .detail__description {
@@ -201,7 +200,7 @@
     font-size: var(--text-xl);
   }
   .detail__price {
-    font-size: var(--text-md);
+    font-size: var(--text-lg);
   }
   .detail__container {
     padding: var(--space-lg);

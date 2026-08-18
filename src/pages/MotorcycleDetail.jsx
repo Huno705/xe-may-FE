@@ -84,10 +84,10 @@ export default function MotorcycleDetail() {
                 <span className="detail__branchLabel">Chi nhánh:</span> {moto.branches.name}
               </p>
             )}
-            {(moto.saigon_deposit > 0 || moto.province_deposit > 0) && (
+            {(moto.saigon_deposit !== undefined || moto.province_deposit !== undefined) && (
               <div className="detail__deposits">
                 <h2 className="detail__sectionTitle">Đưa trước lấy xe</h2>
-                {moto.saigon_deposit > 0 && (
+                {moto.saigon_deposit !== undefined && (
                   <p className="detail__deposit">
                     <span className="detail__depositLabel">Sài Gòn đưa trước:</span>{" "}
                     <span className="detail__depositValue tabular-nums">
@@ -95,7 +95,7 @@ export default function MotorcycleDetail() {
                     </span>
                   </p>
                 )}
-                {moto.province_deposit > 0 && (
+                {moto.province_deposit !== undefined && (
                   <p className="detail__deposit">
                     <span className="detail__depositLabel">Tỉnh đưa trước:</span>{" "}
                     <span className="detail__depositValue tabular-nums">
