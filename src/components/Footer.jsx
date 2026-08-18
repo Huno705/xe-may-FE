@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="foot-line">
       <p className="container">
-        © {new Date().getFullYear()} MOTO Showroom
+        © {new Date().getFullYear()} 3sGo Showroom
       </p>
     </footer>
   );
