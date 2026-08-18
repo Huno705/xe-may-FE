@@ -42,8 +42,8 @@
 
 .branchFloat__row {
   display: grid;
-  grid-template-columns: 4.5rem 1fr;
-  align-items: center;
+  grid-template-columns: max-content minmax(0, 1fr);
+  align-items: start;
   gap: var(--space-sm);
   font-size: var(--text-base);
 }
