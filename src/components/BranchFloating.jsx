@@ -58,7 +58,10 @@ export default function BranchFloating() {
   const { pathname } = useLocation();
   const { selectedBranch } = useBranchFilter();
   const [branches, setBranches] = useState([]);
-  const showAtMobilePageEnd = pathname === "/" || pathname === "/bo-suu-tap";
+  const showAtMobilePageEnd =
+    pathname === "/" ||
+    pathname === "/bo-suu-tap" ||
+    pathname.startsWith("/xe/");
 
   useEffect(() => {
     getBranches().then(setBranches).catch(() => setBranches([]));
