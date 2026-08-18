@@ -199,6 +199,9 @@
 }
 
 @media (max-width: 40rem) {
+  .moto-grid {
+    gap: var(--space-sm);
+  }
   .home__headerSection {
     padding: var(--space-md);
   }
@@ -216,8 +219,7 @@
 
 @media (max-width: 30rem) {
   .moto-grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-lg);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .home {
     padding-top: 6.5rem;

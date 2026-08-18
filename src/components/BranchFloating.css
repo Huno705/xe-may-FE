@@ -106,6 +106,12 @@
   .branchFloat {
     display: none;
   }
+
+  .branchFloat--mobile-page {
+    display: grid;
+    width: calc(100% - 2 * var(--space-md));
+    margin: var(--space-xl) auto 0;
+  }
 }
 
 @media (min-width: 64rem) and (max-width: 114rem) {

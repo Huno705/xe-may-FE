@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { getBranches } from "../api/branches";
 import { useBranchFilter } from "../context/BranchContext";
 import "./BranchFloating.css";
@@ -54,8 +55,10 @@ const FALLBACK_DETAILS = {
 };
 
 export default function BranchFloating() {
+  const { pathname } = useLocation();
   const { selectedBranch } = useBranchFilter();
   const [branches, setBranches] = useState([]);
+  const showAtMobilePageEnd = pathname === "/" || pathname === "/bo-suu-tap";
 
   useEffect(() => {
     getBranches().then(setBranches).catch(() => setBranches([]));
@@ -69,7 +72,10 @@ export default function BranchFloating() {
   if (visibleBranches.length === 0) return null;
 
   return (
-    <aside className="branchFloat" aria-label="Thông tin chi nhánh">
+    <aside
+      className={`branchFloat${showAtMobilePageEnd ? " branchFloat--mobile-page" : ""}`}
+      aria-label="Thông tin chi nhánh"
+    >
       {visibleBranches.map((branch) => {
         const details = FALLBACK_DETAILS[branch.name] || {};
         const subtitle = details.subtitle || branch.name;
