@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getMotorcycles } from "../api/motorcycles";
 import { getBranches } from "../api/branches";
 import { useBranchFilter } from "../context/BranchContext";
@@ -13,15 +13,27 @@ export default function Home() {
   const [status, setStatus] = useState("loading");
   const { selectedBranch, setSelectedBranch } = useBranchFilter();
   const { query, setQuery } = useSearch();
+  const abortRef = useRef(null);
 
   useEffect(() => {
+    abortRef.current = new AbortController();
+    setStatus("loading");
+
     Promise.all([getMotorcycles(), getBranches()])
       .then(([motoData, branchData]) => {
+        if (abortRef.current?.signal.aborted) return;
         setMotorcycles(motoData);
         setBranches(branchData);
         setStatus("ready");
       })
-      .catch(() => setStatus("error"));
+      .catch((err) => {
+        if (err.name === "CanceledError" || abortRef.current?.signal.aborted) return;
+        setStatus("error");
+      });
+
+    return () => {
+      abortRef.current?.abort();
+    };
   }, []);
 
   const normalizedQuery = query.trim().toLowerCase();

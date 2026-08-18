@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { getMotorcycles } from "../api/motorcycles";
 import { getBranches } from "../api/branches";
@@ -17,15 +17,27 @@ export default function Collection() {
   const { selectedBranch, setSelectedBranch } = useBranchFilter();
   const { query, setQuery } = useSearch();
   const [searchParams, setSearchParams] = useSearchParams();
+  const abortRef = useRef(null);
 
   useEffect(() => {
+    abortRef.current = new AbortController();
+    setStatus("loading");
+
     Promise.all([getMotorcycles(), getBranches()])
       .then(([motoData, branchData]) => {
+        if (abortRef.current?.signal.aborted) return;
         setMotorcycles(motoData);
         setBranches(branchData);
         setStatus("ready");
       })
-      .catch(() => setStatus("error"));
+      .catch((err) => {
+        if (err.name === "CanceledError" || abortRef.current?.signal.aborted) return;
+        setStatus("error");
+      });
+
+    return () => {
+      abortRef.current?.abort();
+    };
   }, []);
 
   useEffect(() => {
