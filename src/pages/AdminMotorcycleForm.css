@@ -54,7 +54,8 @@
   gap: var(--space-sm);
 }
 
-.admin-form__field > span {
+.admin-form__field > span,
+.admin-form__field > label {
   font-size: var(--text-sm);
   font-weight: 600;
   color: var(--color-text);
@@ -112,6 +113,26 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(5rem, 1fr));
   gap: var(--space-sm);
+}
+
+.admin-form__previewGrid {
+  grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+  margin-top: var(--space-xs);
+}
+
+.admin-form__newImagePreview {
+  min-width: 0;
+}
+
+.admin-form__previewName {
+  display: block;
+  margin-top: var(--space-xs);
+  overflow: hidden;
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .admin-form__imageItem {
@@ -216,6 +237,9 @@
   }
   .admin-form__imageGrid {
     grid-template-columns: repeat(auto-fill, minmax(4rem, 1fr));
+  }
+  .admin-form__previewGrid {
+    grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr));
   }
 }
 

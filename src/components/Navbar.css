@@ -25,39 +25,15 @@
 .navbar__brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: var(--text-lg);
-  color: var(--color-paper-2);
-  white-space: nowrap;
-  padding-right: 0.6rem;
+  padding-right: 0.8rem;
   border-right: 1.5px solid var(--color-paper-2);
 }
 
-.navbar__brandIcon {
-  display: inline-grid;
-  place-items: center;
-  width: 1.7rem;
-  height: 1.7rem;
-  border-radius: 50%;
-  background: var(--color-accent);
-  color: var(--color-paper-2);
-}
-
-.navbar__brandIcon svg {
-  width: 1rem;
-  height: 1rem;
-}
-
-.navbar__brandText {
-  display: inline-flex;
-  align-items: baseline;
-}
-
-.navbar__brandDot {
-  color: var(--color-accent);
-  font-weight: 700;
+.navbar__brandLogo {
+  display: block;
+  width: 5.25rem;
+  height: 2.65rem;
+  object-fit: contain;
 }
 
 .navbar__menu {
@@ -334,8 +310,11 @@
     gap: 0.5rem;
   }
   .navbar__brand {
-    font-size: var(--text-base);
     padding-right: 0.4rem;
+  }
+  .navbar__brandLogo {
+    width: 4.5rem;
+    height: 2.3rem;
   }
   .navbar__action {
     padding: 0.5rem 0.8rem;

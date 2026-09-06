@@ -16,6 +16,7 @@ export default function AdminDashboard() {
   const [branchError, setBranchError] = useState("");
   const [showBranchModal, setShowBranchModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedBranchId, setSelectedBranchId] = useState("");
 
   const load = () => {
     setStatus("loading");
@@ -66,6 +67,7 @@ export default function AdminDashboard() {
     try {
       await deleteBranch(id);
       setBranches((prev) => prev.filter((b) => b.id !== id));
+      setSelectedBranchId((current) => (current === id ? "" : current));
       setConfirmId(null);
     } catch {
       // ignore
@@ -80,8 +82,13 @@ export default function AdminDashboard() {
   const normalizedQuery = searchQuery.trim().toLowerCase();
 
   const filteredMotorcycles = useMemo(() => {
-    if (!normalizedQuery) return motorcycles;
     return motorcycles.filter((m) => {
+      const matchesBranch = selectedBranchId === ""
+        || (selectedBranchId === "unassigned" ? !m.branch_id : m.branch_id === selectedBranchId);
+
+      if (!matchesBranch) return false;
+      if (!normalizedQuery) return true;
+
       const name = (m.name || "").toLowerCase();
       const description = (m.description || "").toLowerCase();
       const branchName = (m.branches?.name || "").toLowerCase();
@@ -91,7 +98,11 @@ export default function AdminDashboard() {
         branchName.includes(normalizedQuery)
       );
     });
-  }, [motorcycles, normalizedQuery]);
+  }, [motorcycles, normalizedQuery, selectedBranchId]);
+
+  const selectedBranchName = selectedBranchId === "unassigned"
+    ? "Chưa phân chi nhánh"
+    : branches.find((branch) => branch.id === selectedBranchId)?.name;
 
   const clearSearch = () => setSearchQuery("");
 
@@ -251,36 +262,58 @@ export default function AdminDashboard() {
       )}
 
       {status === "ready" && motorcycles.length > 0 && (
-        <div className="admin__searchBar">
-          <svg className="admin__searchIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="11" cy="11" r="7" />
-            <path d="m21 21-4.3-4.3" />
-          </svg>
-          <input
-            type="search"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Tìm theo tên, mô tả hoặc chi nhánh..."
-            className="admin__searchInput"
-            aria-label="Tìm kiếm xe"
-          />
-          {searchQuery && (
-            <button
-              type="button"
-              className="admin__searchClear"
-              onClick={clearSearch}
-              aria-label="Xoá từ khoá"
+        <div className="admin__filterBar">
+          <div className="admin__searchBar">
+            <svg className="admin__searchIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="11" cy="11" r="7" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+            <input
+              type="search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Tìm theo tên, mô tả hoặc chi nhánh..."
+              className="admin__searchInput"
+              aria-label="Tìm kiếm xe"
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                className="admin__searchClear"
+                onClick={clearSearch}
+                aria-label="Xoá từ khoá"
+              >
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              </button>
+            )}
+            {(normalizedQuery || selectedBranchId) && (
+              <span className="admin__searchCount">
+                {filteredMotorcycles.length} / {motorcycles.length} kết quả
+              </span>
+            )}
+          </div>
+
+          <div className="admin__branchFilter">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <path d="M3 21h18M5 21V7l7-4 7 4v14M9 10h.01M15 10h.01M9 14h.01M15 14h.01M10 21v-3h4v3" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <select
+              value={selectedBranchId}
+              onChange={(event) => setSelectedBranchId(event.target.value)}
+              aria-label="Lọc xe theo chi nhánh"
             >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M18 6L6 18M6 6l12 12" />
-              </svg>
-            </button>
-          )}
-          {normalizedQuery && (
-            <span className="admin__searchCount">
-              {filteredMotorcycles.length} / {motorcycles.length} kết quả
-            </span>
-          )}
+              <option value="">Tất cả chi nhánh</option>
+              {branches.map((branch) => (
+                <option key={branch.id} value={branch.id}>{branch.name}</option>
+              ))}
+              <option value="unassigned">Chưa phân chi nhánh</option>
+            </select>
+            <svg className="admin__branchFilterArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+              <path d="m7 10 5 5 5-5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
         </div>
       )}
 
@@ -289,7 +322,11 @@ export default function AdminDashboard() {
       )}
 
       {status === "ready" && motorcycles.length > 0 && filteredMotorcycles.length === 0 && (
-        <p className="admin__state">Không tìm thấy xe phù hợp với "{searchQuery}".</p>
+        <p className="admin__state">
+          Không tìm thấy xe phù hợp
+          {normalizedQuery ? ` với “${searchQuery.trim()}”` : ""}
+          {selectedBranchName ? ` tại ${selectedBranchName}` : ""}.
+        </p>
       )}
 
       {status === "ready" && filteredMotorcycles.length > 0 && (

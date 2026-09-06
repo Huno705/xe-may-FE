@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useSearch } from "../context/SearchContext";
+import logo3sgo from "../assets/3sgo-logo.png";
 import "./Navbar.css";
 
 export default function Navbar() {
@@ -30,15 +31,11 @@ export default function Navbar() {
     <nav className="navbar" aria-label="Điều hướng chính">
       <div className="navbar__inner">
         <Link to="/" className="navbar__brand">
-          <span className="navbar__brandIcon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-              <circle cx="12" cy="12" r="9" />
-              <path d="M12 7v5l3 2" strokeLinecap="round" />
-            </svg>
-          </span>
-          <span className="navbar__brandText">
-            3sGo<span className="navbar__brandDot">.</span>
-          </span>
+          <img
+            className="navbar__brandLogo"
+            src={logo3sgo}
+            alt="3SGO Xe Điện"
+          />
         </Link>
 
         <ul className="navbar__menu">
@@ -63,8 +60,8 @@ export default function Navbar() {
             </a>
           </li>
           <li>
-            <a href="#compare" className="navbar__menuLink">
-              SO SÁNH
+            <a href="#payment" className="navbar__menuLink">
+              CHÍNH SÁCH TRẢ GÓP
             </a>
           </li>
           <li>
@@ -103,11 +100,7 @@ export default function Navbar() {
                 Đăng xuất
               </button>
             </>
-          ) : (
-            <Link to="/login" className="navbar__action navbar__action--primary">
-              Đăng nhập
-            </Link>
-          )}
+          ) : ("")}
         </div>
 
         <button
@@ -144,7 +137,7 @@ export default function Navbar() {
           <li><NavLink to="/bo-suu-tap">BỘ SƯU TẬP</NavLink></li>
           <li><a href="#about">GIỚI THIỆU</a></li>
           <li><a href="#contact">LIÊN HỆ</a></li>
-          <li><a href="#compare">SO SÁNH</a></li>
+          <li><a href="#payment">CHÍNH SÁCH TRẢ GÓP</a></li>
           <li><a href="#news">TIN TỨC</a></li>
           {admin ? (
             <>

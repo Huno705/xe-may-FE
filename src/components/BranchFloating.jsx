@@ -37,18 +37,18 @@ const FacebookIcon = () => (
 
 const FALLBACK_DETAILS = {
   "Quận 12": {
-    phone: "0813.797.781",
+    phone: "0813.79.77.81",
     phoneRaw: "0813797781",
     zalo: "https://zalo.me/0813797781",
-    facebookName: "Xe Điện Lướt Quận 12 - Hỗ Trợ Nậu Xớ",
+    facebookName: "Xe Điện 3sGo Quận 12 - Hỗ Trợ Nậu Xớ",
     facebookUrl: "https://www.facebook.com/share/19HKvSsEE4/?mibextid=wwXIfr",
     subtitle: "Xe Điện Lướt - Quận 12",
   },
   "Quận 8": {
-    phone: "032.5678.300",
-    phoneRaw: "0325678300",
+    phone: "0786.79.79.89",
+    phoneRaw: "0786797989",
     zalo: "https://zalo.me/0325678300",
-    facebookName: "Xe Điện Lướt Quận 8 - Hỗ Trợ Nậu Xớ",
+    facebookName: "Xe Điện 3sGo Quận 8 - Hỗ Trợ Nậu Xớ",
     facebookUrl: "https://www.facebook.com/share/185KY6Hux9/?mibextid=wwXIfr",
     subtitle: "Xe Điện Lướt - Quận 8",
   },

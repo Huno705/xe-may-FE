@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 import {
   getMotorcycle,
@@ -6,6 +6,7 @@ import {
   updateMotorcycle,
 } from "../api/motorcycles";
 import { getBranches } from "../api/branches";
+import { formatCurrencyInput, sanitizeCurrencyInput } from "../utils/format";
 import "./AdminMotorcycleForm.css";
 
 export default function AdminMotorcycleForm() {
@@ -22,9 +23,16 @@ export default function AdminMotorcycleForm() {
   const [branches, setBranches] = useState([]);
   const [existingImages, setExistingImages] = useState([]);
   const [newFiles, setNewFiles] = useState([]);
+  const [newImagePreviews, setNewImagePreviews] = useState([]);
   const [loading, setLoading] = useState(isEdit);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const fileInputRef = useRef(null);
+  const previewUrlsRef = useRef([]);
+
+  useEffect(() => () => {
+    previewUrlsRef.current.forEach((url) => URL.revokeObjectURL(url));
+  }, []);
 
   useEffect(() => {
     getBranches()
@@ -49,11 +57,40 @@ export default function AdminMotorcycleForm() {
   }, [id, isEdit]);
 
   const handleFilesChange = (event) => {
-    setNewFiles(Array.from(event.target.files || []));
+    const files = Array.from(event.target.files || []);
+    previewUrlsRef.current.forEach((url) => URL.revokeObjectURL(url));
+
+    const previews = files.map((file, index) => ({
+      file,
+      url: URL.createObjectURL(file),
+      key: `${file.name}-${file.size}-${file.lastModified}-${index}`,
+    }));
+
+    previewUrlsRef.current = previews.map(({ url }) => url);
+    setNewFiles(files);
+    setNewImagePreviews(previews);
   };
 
   const removeExistingImage = (url) => {
     setExistingImages((prev) => prev.filter((img) => img !== url));
+  };
+
+  const removeNewImage = (indexToRemove) => {
+    const removedPreview = newImagePreviews[indexToRemove];
+    if (removedPreview) URL.revokeObjectURL(removedPreview.url);
+
+    const nextFiles = newFiles.filter((_, index) => index !== indexToRemove);
+    const nextPreviews = newImagePreviews.filter((_, index) => index !== indexToRemove);
+    previewUrlsRef.current = nextPreviews.map(({ url }) => url);
+
+    if (fileInputRef.current && typeof DataTransfer !== "undefined") {
+      const transfer = new DataTransfer();
+      nextFiles.forEach((file) => transfer.items.add(file));
+      fileInputRef.current.files = transfer.files;
+    }
+
+    setNewFiles(nextFiles);
+    setNewImagePreviews(nextPreviews);
   };
 
   const handleSubmit = async (event) => {
@@ -128,37 +165,34 @@ export default function AdminMotorcycleForm() {
           <label className="admin-form__field">
             <span>Giá (VNĐ)</span>
             <input
-              type="number"
-              min="0"
-              step="1000"
-              value={price}
-              onChange={(e) => setPrice(e.target.value)}
+              type="text"
+              inputMode="numeric"
+              value={formatCurrencyInput(price)}
+              onChange={(e) => setPrice(sanitizeCurrencyInput(e.target.value))}
               required
-              placeholder="VD: 28900000"
+              placeholder="VD: 28,900,000"
             />
           </label>
 
           <label className="admin-form__field">
             <span>Sài Gòn đưa trước (VNĐ)</span>
             <input
-              type="number"
-              min="0"
-              step="1000"
-              value={saigonDeposit}
-              onChange={(e) => setSaigonDeposit(e.target.value)}
-              placeholder="VD: 5000000"
+              type="text"
+              inputMode="numeric"
+              value={formatCurrencyInput(saigonDeposit)}
+              onChange={(e) => setSaigonDeposit(sanitizeCurrencyInput(e.target.value))}
+              placeholder="VD: 5,000,000"
             />
           </label>
 
           <label className="admin-form__field">
             <span>Tỉnh đưa trước (VNĐ)</span>
             <input
-              type="number"
-              min="0"
-              step="1000"
-              value={provinceDeposit}
-              onChange={(e) => setProvinceDeposit(e.target.value)}
-              placeholder="VD: 8000000"
+              type="text"
+              inputMode="numeric"
+              value={formatCurrencyInput(provinceDeposit)}
+              onChange={(e) => setProvinceDeposit(sanitizeCurrencyInput(e.target.value))}
+              placeholder="VD: 8,000,000"
             />
           </label>
 
@@ -208,18 +242,46 @@ export default function AdminMotorcycleForm() {
             </div>
           )}
 
-          <label className="admin-form__field">
-            <span>{isEdit ? "Thêm hình ảnh mới" : "Hình ảnh (1 hoặc nhiều)"}</span>
+          <div className="admin-form__field">
+            <label htmlFor="motorcycle-images">
+              {isEdit ? "Thêm hình ảnh mới" : "Hình ảnh (1 hoặc nhiều)"}
+            </label>
             <input
+              ref={fileInputRef}
+              id="motorcycle-images"
               type="file"
               accept="image/*"
               multiple
               onChange={handleFilesChange}
             />
             {newFiles.length > 0 && (
-              <p className="admin-form__fileCount">{newFiles.length} tệp đã chọn</p>
+              <>
+                <p className="admin-form__fileCount" aria-live="polite">
+                  {newFiles.length} tệp đã chọn — xem trước trước khi tải lên
+                </p>
+                <div className="admin-form__imageGrid admin-form__previewGrid">
+                  {newImagePreviews.map(({ file, url, key }, index) => (
+                    <div key={key} className="admin-form__newImagePreview">
+                      <div className="admin-form__imageItem">
+                        <img src={url} alt={`Ảnh xem trước: ${file.name}`} />
+                        <button
+                          type="button"
+                          className="admin-form__removeImage"
+                          onClick={() => removeNewImage(index)}
+                          aria-label={`Bỏ ảnh ${file.name}`}
+                        >
+                          ×
+                        </button>
+                      </div>
+                      <span className="admin-form__previewName" title={file.name}>
+                        {file.name}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </>
             )}
-          </label>
+          </div>
 
           {error && (
             <div className="admin-form__error" role="alert">
