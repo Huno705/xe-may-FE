@@ -54,6 +54,7 @@ const FALLBACK_DETAILS = {
   },
 };
 
+
 export default function BranchFloating() {
   const { pathname } = useLocation();
   const { selectedBranch } = useBranchFilter();
