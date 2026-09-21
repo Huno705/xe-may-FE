@@ -1,5 +1,5 @@
 /* Hallmark · genre: modern-minimal · macrostructure: Catalogue · theme: warm-paper
- * enrichment: blueprint-grid bg · nav: N5 · footer: Ft2
+ * enrichment: blueprint-grid bg · nav: N5 · footer: Ft5
  * pre-emit critique: P5 H4 E5 S5 R4 V5
  * axes: light paper (L 98%, tinted 0.010 chroma) · geometric-sans display · warm accent (hue 45)
  */
@@ -33,6 +33,7 @@
   /* Fonts */
   --font-display: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-body:    "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-statement: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-mono:    ui-monospace, monospace;
 
   /* Type scale — major third (1.25) */

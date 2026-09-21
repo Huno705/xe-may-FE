@@ -6,6 +6,7 @@ import { useBranchFilter } from "../context/BranchContext";
 import { useSearch } from "../context/SearchContext";
 import MotorcycleCard from "../components/MotorcycleCard";
 import ContactInfo from "../components/ContactInfo";
+import StoreLocations from "../components/StoreLocations";
 import "./Home.css";
 
 const PAGE_SIZE = 15;
@@ -255,6 +256,8 @@ export default function Collection() {
           )}
         </>
       )}
+
+      <StoreLocations />
     </div>
   );
 }

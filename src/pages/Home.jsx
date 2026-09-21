@@ -1,10 +1,14 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { getMotorcycles } from "../api/motorcycles";
 import { getBranches } from "../api/branches";
 import { useBranchFilter } from "../context/BranchContext";
 import { useSearch } from "../context/SearchContext";
 import MotorcycleCard from "../components/MotorcycleCard";
 import ContactInfo from "../components/ContactInfo";
+import HeroCarousel from "../components/HeroCarousel";
+import StoreLocations from "../components/StoreLocations";
+import TikTokProfileEmbed from "../components/TikTokProfileEmbed";
 import "./Home.css";
 
 export default function Home() {
@@ -50,6 +54,7 @@ export default function Home() {
   });
 
   const hasFilter = selectedBranch !== null || normalizedQuery.length > 0;
+  const featuredMotorcycles = filteredMotorcycles.slice(0, 6);
 
   const handleClearSearch = () => {
     setQuery("");
@@ -57,12 +62,13 @@ export default function Home() {
 
   return (
     <div className="container home">
+      <HeroCarousel />
       <ContactInfo />
 
-      <div className="home__headerSection">
+      {/* <div className="home__headerSection">
         <header className="home__header">
           <p className="home__eyebrow mono">Showroom · toàn bộ xe hiện có</p>
-          <h1 className="home__title">Bộ sưu tập</h1>
+          <h2 className="home__title">Xe nổi bật</h2>
         </header>
 
         {branches.length > 0 && (
@@ -99,7 +105,7 @@ export default function Home() {
             </button>
           </div>
         )}
-      </div>
+      </div> */}
 
       {status === "loading" && (
         <p className="home__state">Đang tải danh sách xe…</p>
@@ -120,12 +126,24 @@ export default function Home() {
       )}
 
       {status === "ready" && filteredMotorcycles.length > 0 && (
-        <div className="moto-grid">
-          {filteredMotorcycles.map((moto) => (
-            <MotorcycleCard key={moto.id} motorcycle={moto} />
-          ))}
-        </div>
+        <>
+          <div className="moto-grid">
+            {featuredMotorcycles.map((moto) => (
+              <MotorcycleCard key={moto.id} motorcycle={moto} />
+            ))}
+          </div>
+
+          <div className="home__more">
+            <Link className="home__moreLink" to="/bo-suu-tap">
+              Xem thêm
+              <span aria-hidden="true">→</span>
+            </Link>
+          </div>
+        </>
       )}
+
+      <TikTokProfileEmbed />
+      <StoreLocations />
     </div>
   );
 }

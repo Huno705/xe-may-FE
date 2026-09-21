@@ -1,12 +1,14 @@
 .branchFloat {
   position: fixed;
-  top: 50%;
+  top: 6rem;
+  bottom: var(--space-md);
   right: var(--space-md);
-  transform: translateY(-50%);
+  transform: none;
   display: grid;
-  gap: var(--space-md);
-  width: 20rem;
-  max-height: calc(100vh - var(--space-2xl));
+  align-content: start;
+  gap: var(--space-sm);
+  width: 17rem;
+  max-height: calc(100vh - 7rem);
   overflow-y: auto;
   z-index: 30;
 }
@@ -15,16 +17,16 @@
   background: var(--color-paper-2);
   border: 2px solid var(--color-rule-2);
   border-radius: var(--radius-md);
-  padding: var(--space-md);
+  padding: var(--space-sm);
   box-shadow: 0 12px 28px -18px oklch(30% 0.02 60 / 0.35);
 }
 
 .branchFloat__title {
   font-family: var(--font-display);
-  font-size: var(--text-md);
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--color-ink);
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-xs);
 }
 
 .branchFloat__title span {
@@ -34,7 +36,7 @@
 
 .branchFloat__list {
   display: grid;
-  gap: var(--space-xs);
+  gap: 0.35rem;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -44,8 +46,8 @@
   display: grid;
   grid-template-columns: max-content minmax(0, 1fr);
   align-items: start;
-  gap: var(--space-sm);
-  font-size: var(--text-base);
+  gap: var(--space-xs);
+  font-size: var(--text-sm);
 }
 
 .branchFloat__label {
@@ -74,8 +76,8 @@
 .branchFloat__facebook {
   display: inline-grid;
   place-items: center;
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 1.8rem;
+  height: 1.8rem;
   border-radius: 50%;
   transition: transform var(--dur-short) var(--ease-out);
 }
@@ -109,8 +111,33 @@
 
   .branchFloat--mobile-page {
     display: grid;
-    width: calc(100% - 2 * var(--space-md));
+    gap: var(--space-sm);
+    width: min(calc(100% - 3rem), 17rem);
     margin: var(--space-xl) auto 0;
+  }
+
+  .branchFloat--mobile-page .branchFloat__card {
+    padding: var(--space-sm);
+  }
+
+  .branchFloat--mobile-page .branchFloat__title {
+    margin-bottom: var(--space-xs);
+    font-size: 1.1rem;
+  }
+
+  .branchFloat--mobile-page .branchFloat__list {
+    gap: 0.35rem;
+  }
+
+  .branchFloat--mobile-page .branchFloat__row {
+    gap: var(--space-xs);
+    font-size: var(--text-sm);
+  }
+
+  .branchFloat--mobile-page .branchFloat__zalo,
+  .branchFloat--mobile-page .branchFloat__facebook {
+    width: 1.75rem;
+    height: 1.75rem;
   }
 }
 
