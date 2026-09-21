@@ -52,6 +52,14 @@ const FALLBACK_DETAILS = {
     facebookUrl: "https://www.facebook.com/share/185KY6Hux9/?mibextid=wwXIfr",
     subtitle: "Xe Điện 3SGo - Quận 8",
   },
+  "Quận Phú Nhuận": {
+    phone: "0768.79.79.89",
+    phoneRaw: "0768797989",
+    zalo: "https://zalo.me/0768797989",
+    facebookName: "Xe Điện 3sGo - Phú Nhuận",
+    facebookUrl: "https://www.facebook.com/p/Xe-%C4%90i%E1%BB%87n-3SGo-Ph%C3%BA-Nhu%E1%BA%ADn-61594204924374/",
+    subtitle: "Xe Điện 3SGo - Phú Nhuận",
+  },
 };
 
 
