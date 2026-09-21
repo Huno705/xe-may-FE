@@ -86,7 +86,7 @@ export default function HeroCarousel() {
       <div className="heroCarousel__shade" aria-hidden="true" />
 
       <div className="heroCarousel__content">
-        <p className="heroCarousel__eyebrow mono">Xe máy điện 3SGO</p>
+        <p className="heroCarousel__eyebrow mono">Xe điện 3SGO</p>
         <h1 className="heroCarousel__title">Lựa chọn xe điện dành cho bạn</h1>
         <p className="heroCarousel__description">Hỗ trợ nợ xấu
         </p>
