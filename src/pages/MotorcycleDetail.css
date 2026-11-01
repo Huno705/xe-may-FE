@@ -3,6 +3,10 @@
   padding-bottom: var(--space-3xl);
 }
 
+.detail > .favoriteMotorcycles {
+  margin-top: var(--space-2xl);
+}
+
 .detail__container {
   background: var(--color-paper-2);
   border: 2px solid var(--color-rule-2);

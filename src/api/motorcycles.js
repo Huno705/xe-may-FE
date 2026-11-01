@@ -1,12 +1,19 @@
 import client from "./client";
 
-export const getMotorcycles = async () => {
-  const { data } = await client.get("/motorcycles");
+export const getMotorcycles = async ({ signal } = {}) => {
+  const { data } = await client.get("/motorcycles", { signal });
   return data;
 };
 
-export const getMotorcycle = async (id) => {
-  const { data } = await client.get(`/motorcycles/${id}`);
+export const getLatestMotorcycles = async ({ signal } = {}) => {
+  const motorcycles = await getMotorcycles({ signal });
+  return [...motorcycles]
+    .sort((a, b) => (Date.parse(b.created_at) || 0) - (Date.parse(a.created_at) || 0))
+    .slice(0, 6);
+};
+
+export const getMotorcycle = async (id, { signal } = {}) => {
+  const { data } = await client.get(`/motorcycles/${id}`, { signal });
   return data;
 };
 

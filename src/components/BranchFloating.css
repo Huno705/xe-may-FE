@@ -1,6 +1,6 @@
 .branchFloat {
   position: fixed;
-  top: 6rem;
+  top: calc(var(--site-nav-bottom, 4rem) + var(--space-md));
   bottom: var(--space-md);
   right: var(--space-md);
   transform: none;
@@ -8,7 +8,7 @@
   align-content: start;
   gap: var(--space-sm);
   width: 17rem;
-  max-height: calc(100vh - 7rem);
+  max-height: calc(100dvh - var(--site-nav-bottom, 4rem) - var(--space-md) * 2);
   overflow-y: auto;
   z-index: 30;
 }
