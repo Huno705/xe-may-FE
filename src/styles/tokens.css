@@ -1,5 +1,5 @@
 /* Hallmark · genre: modern-minimal · macrostructure: Catalogue · theme: warm-paper
- * enrichment: blueprint-grid bg · nav: N5 · footer: Ft5
+ * enrichment: blueprint-grid bg · nav: two-tier storefront · footer: Ft5
  * pre-emit critique: P5 H4 E5 S5 R4 V5
  * axes: light paper (L 98%, tinted 0.010 chroma) · geometric-sans display · warm accent (hue 45)
  */
@@ -19,6 +19,7 @@
   /* Accent — signal orange, deepened for contrast on light paper */
   --color-accent:   oklch(56% 0.17 45);
   --color-accent-2: oklch(50% 0.16 42);
+  --color-accent-ink: var(--color-paper-2);
   --color-focus:    oklch(56% 0.17 45);
   --color-danger:   oklch(52% 0.19 25);
   --color-success:  oklch(52% 0.14 150);

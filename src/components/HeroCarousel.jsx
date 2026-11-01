@@ -1,24 +1,30 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import quan12Image1 from "../assets/hero-section/quan-12-1.webp";
+import quan12Image2 from "../assets/hero-section/quan-12-2.webp";
+import quan8Image1 from "../assets/hero-section/quan-8-1.webp";
+import quan8Image2 from "../assets/hero-section/quan-8-2.webp";
+import phuNhuanImage1 from "../assets/hero-section/phu-nhuan-1.webp";
+import phuNhuanImage2 from "../assets/hero-section/phu-nhuan-2.webp";
 import "./HeroCarousel.css";
 
-const heroImageModules = import.meta.glob(
-  "../assets/hero-section/*.{png,jpg,jpeg,JPG,JPEG}",
-  { eager: true, import: "default" },
-);
-
-const HERO_IMAGES = Object.entries(heroImageModules)
-  .sort(([pathA], [pathB]) => pathA.localeCompare(pathB))
-  .map(([, src], index) => ({
-    src,
-    alt: `Không gian và xe điện tại showroom 3sGo ${index + 1}`,
-  }));
+const HERO_IMAGES = [
+  { src: quan12Image1, alt: "Showroom xe điện 3sGo Quận 12 - ảnh 1" },
+  { src: quan12Image2, alt: "Showroom xe điện 3sGo Quận 12 - ảnh 2" },
+  { src: quan8Image1, alt: "Showroom xe điện 3sGo Quận 8 - ảnh 1" },
+  { src: quan8Image2, alt: "Showroom xe điện 3sGo Quận 8 - ảnh 2" },
+  { src: phuNhuanImage1, alt: "Showroom xe điện 3sGo Phú Nhuận - ảnh 1" },
+  { src: phuNhuanImage2, alt: "Showroom xe điện 3sGo Phú Nhuận - ảnh 2" },
+];
 
 const AUTOPLAY_DELAY = 5000;
 
 export default function HeroCarousel() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [hasFocus, setHasFocus] = useState(false);
+  const [playbackPaused, setPlaybackPaused] = useState(false);
+  const isPaused = isHovered || hasFocus || playbackPaused;
 
   useEffect(() => {
     if (
@@ -48,7 +54,7 @@ export default function HeroCarousel() {
 
   const handleBlur = (event) => {
     if (!event.currentTarget.contains(event.relatedTarget)) {
-      setIsPaused(false);
+      setHasFocus(false);
     }
   };
 
@@ -57,9 +63,9 @@ export default function HeroCarousel() {
       className="heroCarousel"
       aria-label="Hình ảnh nổi bật của 3sGo"
       aria-roledescription="carousel"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-      onFocus={() => setIsPaused(true)}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onFocus={() => setHasFocus(true)}
       onBlur={handleBlur}
     >
       <div
@@ -74,6 +80,14 @@ export default function HeroCarousel() {
             aria-hidden={index !== currentIndex}
           >
             <img
+              className="heroCarousel__backdrop"
+              src={image.src}
+              alt=""
+              aria-hidden="true"
+              loading={index === 0 ? "eager" : "lazy"}
+            />
+            <img
+              className="heroCarousel__image"
               src={image.src}
               alt={index === currentIndex ? image.alt : ""}
               loading={index === 0 ? "eager" : "lazy"}
@@ -97,16 +111,18 @@ export default function HeroCarousel() {
       </div>
 
       {HERO_IMAGES.length > 1 && (
-        <>
-          <div className="heroCarousel__arrows">
-            <button type="button" onClick={showPrevious} aria-label="Ảnh trước">
-              <span aria-hidden="true">←</span>
-            </button>
-            <button type="button" onClick={showNext} aria-label="Ảnh tiếp theo">
-              <span aria-hidden="true">→</span>
-            </button>
-          </div>
-
+        <div className="heroCarousel__controls">
+          <button
+            className="heroCarousel__playback"
+            type="button"
+            onClick={() => setPlaybackPaused((paused) => !paused)}
+            aria-label={playbackPaused ? "Tiếp tục chuyển ảnh tự động" : "Tạm dừng chuyển ảnh tự động"}
+            aria-pressed={playbackPaused}
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              {playbackPaused ? <path d="m8 5 11 7-11 7Z" /> : <path d="M6 5h4v14H6zM14 5h4v14h-4z" />}
+            </svg>
+          </button>
           <div className="heroCarousel__dots" aria-label="Chọn ảnh">
             {HERO_IMAGES.map((image, index) => (
               <button
@@ -119,7 +135,18 @@ export default function HeroCarousel() {
               />
             ))}
           </div>
-        </>
+          <span className="heroCarousel__counter" aria-label={`Ảnh ${currentIndex + 1} trên ${HERO_IMAGES.length}`}>
+            {currentIndex + 1} / {HERO_IMAGES.length}
+          </span>
+          <div className="heroCarousel__arrows">
+            <button type="button" onClick={showPrevious} aria-label="Ảnh trước">
+              <span aria-hidden="true">←</span>
+            </button>
+            <button type="button" onClick={showNext} aria-label="Ảnh tiếp theo">
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </div>
       )}
     </section>
   );

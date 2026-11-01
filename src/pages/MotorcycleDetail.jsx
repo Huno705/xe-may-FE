@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getMotorcycle } from "../api/motorcycles";
 import { formatPrice } from "../utils/format";
 import Lightbox from "../components/Lightbox";
+import FavoriteMotorcycles from "../components/FavoriteMotorcycles";
 import "./MotorcycleDetail.css";
 
 export default function MotorcycleDetail() {
@@ -11,25 +12,27 @@ export default function MotorcycleDetail() {
   const [activeImage, setActiveImage] = useState(0);
   const [status, setStatus] = useState("loading");
   const [lightboxOpen, setLightboxOpen] = useState(false);
-  const abortRef = useRef(null);
 
   useEffect(() => {
-    abortRef.current = new AbortController();
+    const controller = new AbortController();
     setStatus("loading");
+    setActiveImage(0);
+    setLightboxOpen(false);
+    window.scrollTo({ top: 0, behavior: "instant" });
 
-    getMotorcycle(id)
+    getMotorcycle(id, { signal: controller.signal })
       .then((data) => {
-        if (abortRef.current?.signal.aborted) return;
+        if (controller.signal.aborted) return;
         setMoto(data);
         setStatus("ready");
       })
       .catch((err) => {
-        if (err.name === "CanceledError" || abortRef.current?.signal.aborted) return;
+        if (err.name === "CanceledError" || controller.signal.aborted) return;
         setStatus("error");
       });
 
     return () => {
-      abortRef.current?.abort();
+      controller.abort();
     };
   }, [id]);
 
@@ -123,6 +126,8 @@ export default function MotorcycleDetail() {
           </div>
         </div>
       </div>
+
+      <FavoriteMotorcycles />
 
       {lightboxOpen && images.length > 0 && (
         <Lightbox

@@ -1,0 +1,8 @@
+/* Navbar now occupies document flow; pages no longer need a fixed-header gap. */
+.siteMain > :is(.home, .detail, .detail__state, .admin, .admin-form, .admin-form__state, .admin-branches) {
+  padding-top: var(--space-lg);
+}
+
+.siteMain [id] {
+  scroll-margin-top: calc(var(--site-nav-height, 4rem) + var(--space-lg));
+}

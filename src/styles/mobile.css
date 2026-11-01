@@ -1,0 +1,569 @@
+/* Hallmark · responsive refinement · existing warm-paper theme
+ * Mobile overrides stay together; desktop layout and palette are preserved.
+ */
+@media (max-width: 48rem) {
+  .siteMain > :is(.home, .detail, .detail__state, .admin, .admin-form, .admin-form__state, .admin-branches) {
+    padding-top: var(--space-md);
+    padding-bottom: var(--space-xl);
+  }
+
+  .siteMasthead__inner {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+    gap: var(--space-xs) var(--space-md);
+    padding-block: var(--space-sm);
+  }
+
+  .siteMasthead__brand {
+    width: 6rem;
+    justify-self: center;
+  }
+
+  .siteMasthead__info {
+    width: 100%;
+    text-align: center;
+  }
+
+  .siteMasthead__support {
+    display: none;
+  }
+
+  .siteMasthead__title {
+    margin-bottom: var(--space-xs);
+  }
+
+  .siteMasthead__branches {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2xs);
+  }
+
+  .siteMasthead__branches li + li {
+    padding-inline-start: 0;
+    border-inline-start: 0;
+  }
+
+  .siteMasthead__branch {
+    display: grid;
+    grid-template-columns: 1rem minmax(0, 1fr);
+    min-height: 24px;
+    align-items: start;
+    line-height: 1.35;
+    text-align: center;
+  }
+
+  .siteMasthead__branch > svg {
+    margin-top: calc((1.35em - 1rem) / 2);
+  }
+
+  .siteMasthead__branchCopy strong {
+    display: inline;
+    margin-inline-end: var(--space-xs);
+  }
+
+  .navbar__drawerList {
+    padding-bottom: max(var(--space-md), env(safe-area-inset-bottom));
+  }
+
+  .navbar__drawerList .navbar__menuLink {
+    min-height: 48px;
+  }
+
+  .heroCarousel {
+    --hero-mobile-image-height: clamp(14rem, 70vw, 24rem);
+    min-height: 0;
+  }
+
+  .heroCarousel__track {
+    height: var(--hero-mobile-image-height);
+  }
+
+  .heroCarousel__shade {
+    height: var(--hero-mobile-image-height);
+    background: none;
+  }
+
+  .heroCarousel__content {
+    min-height: 0;
+    max-width: none;
+    margin-top: calc(var(--hero-mobile-image-height) + 3.75rem);
+    padding: var(--space-md);
+    justify-content: flex-start;
+  }
+
+  .heroCarousel__eyebrow {
+    margin-bottom: var(--space-xs);
+  }
+
+  .heroCarousel__title {
+    font-size: clamp(1.5rem, 6.5vw, 2.25rem);
+    line-height: 1.2;
+    text-wrap: pretty;
+  }
+
+  .heroCarousel__description {
+    margin-top: var(--space-xs);
+    font-size: var(--text-sm);
+  }
+
+  .heroCarousel__cta {
+    min-height: 44px;
+    margin-top: var(--space-md);
+    max-width: 100%;
+    white-space: nowrap;
+  }
+
+  .heroCarousel__controls {
+    top: var(--hero-mobile-image-height);
+    bottom: auto;
+    left: var(--space-md);
+    right: var(--space-md);
+    height: 3.75rem;
+  }
+
+  .heroCarousel__dots {
+    display: none;
+  }
+
+  .heroCarousel__counter {
+    display: block;
+    flex: 1;
+    text-align: center;
+  }
+
+  .heroCarousel__arrows button:hover,
+  .heroCarousel__playback:hover,
+  .heroCarousel__cta:hover {
+    transform: none;
+  }
+
+  .contactInfo__hotlineNumber {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    white-space: nowrap;
+  }
+
+  .favoriteMotorcycles {
+    padding: var(--space-lg) var(--space-sm);
+  }
+
+  .favoriteMotorcycles__title {
+    margin-bottom: var(--space-lg);
+  }
+
+  .favoriteMotorcycles__grid,
+  .moto-grid {
+    gap: var(--space-sm);
+  }
+
+  .favoriteMotorcycles__more {
+    margin-top: var(--space-lg);
+  }
+
+  .moto-card {
+    min-width: 0;
+    border-width: 2px;
+    border-radius: var(--radius-md);
+  }
+
+  .moto-card__meta {
+    min-width: 0;
+    gap: var(--space-xs);
+    padding: var(--space-xs);
+  }
+
+  .moto-card__name {
+    font-size: var(--text-sm);
+    line-height: 1.4;
+  }
+
+  .moto-card__price {
+    font-size: var(--text-sm);
+    line-height: 1.3;
+    white-space: nowrap;
+  }
+
+  .moto-card__branch {
+    top: var(--space-xs);
+    right: var(--space-xs);
+    max-width: calc(100% - var(--space-md));
+    padding: var(--space-2xs) var(--space-xs);
+    overflow: hidden;
+    font-size: 0.75rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .moto-card__deposits {
+    display: grid;
+    gap: var(--space-xs);
+    min-width: 0;
+  }
+
+  .moto-card__deposit {
+    padding: 0;
+    font-size: 0.8125rem;
+    line-height: 1.4;
+  }
+
+  .moto-card__deposit-value {
+    display: block;
+    white-space: nowrap;
+  }
+
+  .home__headerSection {
+    padding: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .home__branchTab,
+  .pagination__btn {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .home__searchBadge {
+    display: flex;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .home__searchBadge > span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .home__searchBadge button {
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    margin-inline-start: auto;
+  }
+
+  .detail__container {
+    min-width: 0;
+    padding: var(--space-md);
+  }
+
+  .detail__layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .detail__gallery,
+  .detail__info {
+    min-width: 0;
+  }
+
+  .detail__back {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-bottom: var(--space-md);
+    font-size: var(--text-xs);
+  }
+
+  .detail__name {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+  }
+
+  .detail__price {
+    font-size: var(--text-lg);
+  }
+
+  .detail__deposits {
+    padding: var(--space-sm);
+  }
+
+  .detail__deposit {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2xs);
+  }
+
+  .detail__depositValue {
+    white-space: nowrap;
+  }
+
+  .detail > .favoriteMotorcycles {
+    margin-top: var(--space-xl);
+  }
+
+  .lightbox {
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .lightbox__toolbar {
+    padding: max(var(--space-xs), env(safe-area-inset-top)) var(--space-sm) var(--space-xs);
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+  }
+
+  .lightbox__tools {
+    margin-inline-start: auto;
+    gap: var(--space-2xs);
+  }
+
+  .lightbox__btn,
+  .lightbox__nav {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+  }
+
+  .lightbox__btn--close {
+    margin-left: 0;
+  }
+
+  .lightbox__stage {
+    min-height: 0;
+    padding: 0 var(--space-xs) max(var(--space-md), env(safe-area-inset-bottom));
+  }
+
+  .lightbox__image {
+    max-width: 100%;
+    max-height: calc(100dvh - 9rem);
+  }
+
+  .storeLocations {
+    margin-top: var(--space-xl);
+  }
+
+  .storeLocations__title {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+
+  .storeLocations__panel {
+    grid-template-columns: minmax(0, 1fr);
+    padding: var(--space-xs);
+    gap: var(--space-xs);
+  }
+
+  .storeLocations__branch {
+    min-height: 44px;
+    padding: var(--space-sm);
+    gap: var(--space-xs);
+  }
+
+  .storeLocations__branchCopy strong {
+    font-size: var(--text-xs);
+  }
+
+  .storeLocations__branchCopy > span {
+    font-size: 0.8125rem;
+    line-height: 1.4;
+  }
+
+  .storeLocations__directions {
+    min-height: 44px;
+    padding: var(--space-sm);
+    font-size: var(--text-xs);
+  }
+
+  .storeLocations__map {
+    min-height: clamp(18rem, 65vw, 24rem);
+  }
+
+  .branchFloat--mobile-page {
+    width: min(calc(100% - var(--space-md) * 2), 28rem);
+  }
+
+  .branchFloat--mobile-page .branchFloat__zalo,
+  .branchFloat--mobile-page .branchFloat__facebook {
+    width: 44px;
+    height: 44px;
+  }
+
+  .branchFloat__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .siteFooter__meta {
+    padding-inline-end: 4rem;
+  }
+
+  .login {
+    min-height: 0;
+    padding-block: var(--space-xl);
+  }
+
+  .login__form {
+    min-width: 0;
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .login__title {
+    font-size: clamp(1.5rem, 5.5vw, 2rem);
+    white-space: normal;
+  }
+
+  .login__field input,
+  .login__submit,
+  .login__passwordToggle {
+    min-height: 44px;
+  }
+
+  .login__passwordToggle {
+    width: 44px;
+    right: var(--space-2xs);
+  }
+
+  .admin__container,
+  .admin-form__card,
+  .admin-branches__card {
+    min-width: 0;
+    padding: var(--space-md);
+  }
+
+  .admin__header {
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .admin__title,
+  .admin-form__title {
+    font-size: var(--text-lg);
+  }
+
+  .admin__headerActions,
+  .admin__filterBar,
+  .admin-branches__formGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+  }
+
+  .admin__headerActions > * {
+    justify-content: center;
+    text-align: center;
+    min-height: 44px;
+  }
+
+  .admin__table,
+  .admin__table tbody {
+    display: block;
+    width: 100%;
+  }
+
+  .admin__table thead {
+    display: none;
+  }
+
+  .admin__table tr {
+    display: grid;
+    grid-template-columns: 4rem minmax(0, 1fr);
+    gap: var(--space-xs) var(--space-sm);
+    padding: var(--space-sm);
+    align-items: center;
+  }
+
+  .admin__table td {
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .admin__table td:first-child {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  .admin__table td:nth-child(2),
+  .admin__table td:nth-child(3) {
+    grid-column: 2;
+  }
+
+  .admin__table td:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .admin__thumb {
+    width: 4rem;
+    height: 3rem;
+  }
+
+  .admin__actions {
+    flex-wrap: wrap;
+  }
+
+  .admin__actions > *,
+  .admin-branches__actions > *,
+  .admin-form__cancel,
+  .admin-form__removeImage,
+  .modal__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .admin-form__field {
+    min-width: 0;
+  }
+
+  .siteMain input,
+  .siteMain select,
+  .siteMain textarea {
+    min-width: 0;
+    max-width: 100%;
+    font-size: 1rem;
+  }
+
+  .admin-form__field input,
+  .admin-form__field select,
+  .admin-form__field textarea {
+    width: 100%;
+  }
+
+  .modal-overlay {
+    padding: var(--space-sm);
+  }
+
+  .modal {
+    max-height: calc(100dvh - var(--space-lg));
+    border-radius: var(--radius-lg);
+  }
+
+  .modal__header,
+  .modal__body {
+    padding: var(--space-md);
+  }
+}
+
+@media (max-width: 64rem) {
+  .tiktokProfile {
+    width: 100%;
+    min-width: 0;
+    margin-top: var(--space-xl);
+    margin-left: 0;
+    transform: none;
+  }
+
+  .tiktokProfile__embed {
+    min-width: 0;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .tiktokProfile__embed .tiktok-embed {
+    width: 100% !important;
+    min-width: 0 !important;
+    zoom: 1;
+  }
+
+  .tiktokProfile__title {
+    font-size: clamp(1.5rem, 4.5vw, var(--text-xl));
+  }
+}
+
+@media (max-width: 22rem) {
+  .moto-grid,
+  .favoriteMotorcycles__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
