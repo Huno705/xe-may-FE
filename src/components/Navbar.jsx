@@ -15,12 +15,17 @@ const NAV_ITEMS = [
   { section: "news", label: "Tin tức" },
 ];
 
-const HEADER_BRANCHES = ["quan-12", "quan-8", "phu-nhuan"].map((id) => {
-  const store = STORE_LOCATIONS.find((store) => store.id === id);
-  return id === "phu-nhuan"
-    ? { ...store, address: "328 Luỹ Bán Bích, Tân Phú, TP.HCM" }
-    : store;
-});
+const HEADER_BRANCHES = [
+  ...["quan-12", "quan-8", "phu-nhuan"].map((id) =>
+    STORE_LOCATIONS.find((store) => store.id === id),
+  ),
+  {
+    id: "tan-phu",
+    name: "Xe Điện 3sGo - Tân Phú",
+    shortName: "Chi nhánh Tân Phú",
+    address: "328 Luỹ Bán Bích, Tân Phú, TP.HCM",
+  },
+];
 
 function SearchIcon() {
   return (
@@ -177,7 +182,7 @@ export default function Navbar() {
             <ul
               id="navbar-branches"
               className="siteMasthead__branches"
-              aria-label="Địa chỉ ba chi nhánh"
+              aria-label="Địa chỉ bốn chi nhánh"
             >
               {HEADER_BRANCHES.map((store) => (
                 <li key={store.id}>
