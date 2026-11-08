@@ -15,9 +15,12 @@ const NAV_ITEMS = [
   { section: "news", label: "Tin tức" },
 ];
 
-const HEADER_BRANCHES = ["quan-12", "quan-8", "phu-nhuan"].map((id) =>
-  STORE_LOCATIONS.find((store) => store.id === id),
-);
+const HEADER_BRANCHES = ["quan-12", "quan-8", "phu-nhuan"].map((id) => {
+  const store = STORE_LOCATIONS.find((store) => store.id === id);
+  return id === "phu-nhuan"
+    ? { ...store, address: "328 Luỹ Bán Bích, Tân Phú, TP.HCM" }
+    : store;
+});
 
 function SearchIcon() {
   return (
