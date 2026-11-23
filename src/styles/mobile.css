@@ -467,18 +467,25 @@
     overflow-wrap: anywhere;
   }
 
-  .admin__table td:first-child {
+  .admin__table .admin__imageCell {
     grid-column: 1;
-    grid-row: 1 / span 2;
+    grid-row: 1 / span 3;
   }
 
-  .admin__table td:nth-child(2),
-  .admin__table td:nth-child(3) {
+  .admin__table .admin__nameCell,
+  .admin__table .admin__branchCell,
+  .admin__table .admin__priceCell {
     grid-column: 2;
   }
 
-  .admin__table td:last-child {
+  .admin__table .admin__actionsCell {
     grid-column: 1 / -1;
+  }
+
+  .admin__cellLabel {
+    display: inline;
+    font-weight: 400;
+    color: var(--color-neutral);
   }
 
   .admin__thumb {

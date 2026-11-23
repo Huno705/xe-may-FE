@@ -335,6 +335,7 @@ export default function AdminDashboard() {
             <tr>
               <th scope="col">Hình</th>
               <th scope="col">Tên xe</th>
+              <th scope="col">Chi nhánh</th>
               <th scope="col">Giá</th>
               <th scope="col">
                 Thao tác
@@ -344,7 +345,7 @@ export default function AdminDashboard() {
           <tbody>
             {filteredMotorcycles.map((moto) => (
               <tr key={moto.id}>
-                <td>
+                <td className="admin__imageCell">
                   <div className="admin__thumb">
                     {moto.images?.[0] ? (
                       <img src={moto.images[0]} alt={moto.name} />
@@ -353,9 +354,13 @@ export default function AdminDashboard() {
                     )}
                   </div>
                 </td>
-                <td>{moto.name}</td>
-                <td className="tabular-nums">{formatPrice(moto.price)}</td>
-                <td>
+                <td className="admin__nameCell">{moto.name}</td>
+                <td className="admin__branchCell">
+                  <span className="admin__cellLabel" aria-hidden="true">Chi nhánh: </span>
+                  {moto.branches?.name || "Chưa phân chi nhánh"}
+                </td>
+                <td className="admin__priceCell tabular-nums">{formatPrice(moto.price)}</td>
+                <td className="admin__actionsCell">
                   <div className="admin__actions">
                     <Link to={`/admin/xe/${moto.id}`} className="admin__editLink">
                       Sửa

@@ -277,6 +277,16 @@
   border-right: none;
 }
 
+.admin__branchCell {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.admin__cellLabel {
+  display: none;
+}
+
 .admin__thumb {
   width: 4rem;
   height: 3rem;
